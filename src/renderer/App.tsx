@@ -3,7 +3,6 @@ import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Dashboard from './components/Dashboard/Dashboard';
 import DecisionHub from './components/Overlay/DecisionHub';
 import DecisionHubPickle from './components/Overlay/DecisionHubPickle';
-import OverlayDemo from './components/Overlay/OverlayDemo';
 
 const App: React.FC = () => {
   return (
@@ -47,7 +46,6 @@ const App: React.FC = () => {
           </div>
         } />
         <Route path="/overlay-old" element={<DecisionHub />} />
-        <Route path="/glass" element={<OverlayDemo />} />
         <Route path="/*" element={<Dashboard />} />
       </Routes>
     </Router>

@@ -5,6 +5,18 @@ import theme from '../../styles/theme';
 
 const WorkspaceView: React.FC = () => {
   const [activeWorkspace, setActiveWorkspace] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check if mobile on mount and window resize
+  React.useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
   
   const workspaces = [
     {
@@ -50,19 +62,21 @@ const WorkspaceView: React.FC = () => {
     <div>
       <div style={{
         display: 'flex',
+        flexDirection: isMobile ? 'column' : 'row',
         justifyContent: 'space-between',
-        alignItems: 'center',
+        alignItems: isMobile ? 'stretch' : 'center',
+        gap: isMobile ? theme.spacing.md : 0,
         marginBottom: theme.spacing.lg,
       }}>
         <h1 style={{ 
-          fontSize: '24px', 
+          fontSize: isMobile ? '20px' : '24px', 
           fontWeight: 600, 
           color: theme.colors.text.primary 
         }}>
           Collaborative <span style={{ color: theme.colors.text.red }}>Workspaces</span>
         </h1>
         <button style={{
-          padding: '10px 20px',
+          padding: isMobile ? '12px 20px' : '10px 20px',
           background: theme.colors.text.red,
           color: '#ffffff',
           border: 'none',
@@ -82,11 +96,13 @@ const WorkspaceView: React.FC = () => {
 
       <div style={{
         display: 'grid',
-        gridTemplateColumns: '1fr 300px',
+        gridTemplateColumns: isMobile ? '1fr' : '1fr 300px',
         gap: theme.spacing.lg,
       }}>
         {/* Workspaces List */}
-        <div>
+        <div style={{
+          order: isMobile ? 1 : 0,
+        }}>
           <div style={{
             display: 'grid',
             gap: theme.spacing.md,
@@ -109,7 +125,7 @@ const WorkspaceView: React.FC = () => {
               >
                 {/* Status Badge */}
                 <div style={{
-                  position: 'absolute',
+                  position: isMobile ? 'static' : 'absolute',
                   top: '20px',
                   right: '20px',
                   padding: '4px 8px',
@@ -122,6 +138,9 @@ const WorkspaceView: React.FC = () => {
                   borderRadius: theme.borderRadius.sm,
                   fontSize: '12px',
                   fontWeight: 500,
+                  display: 'inline-block',
+                  marginBottom: isMobile ? '12px' : 0,
+                  width: 'fit-content',
                 }}>
                   {workspace.status === 'voting' ? 'Voting in Progress' : 'Active'}
                 </div>
@@ -174,8 +193,9 @@ const WorkspaceView: React.FC = () => {
 
                     <div style={{
                       display: 'flex',
-                      gap: '20px',
-                      fontSize: '13px',
+                      flexWrap: 'wrap',
+                      gap: isMobile ? '12px' : '20px',
+                      fontSize: isMobile ? '12px' : '13px',
                       color: theme.colors.text.secondary,
                     }}>
                       <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
@@ -194,6 +214,7 @@ const WorkspaceView: React.FC = () => {
                     {/* Action Buttons */}
                     <div style={{
                       display: 'flex',
+                      flexWrap: isMobile ? 'wrap' : 'nowrap',
                       gap: theme.spacing.sm,
                       marginTop: theme.spacing.md,
                     }}>
@@ -259,6 +280,8 @@ const WorkspaceView: React.FC = () => {
           padding: '20px',
           border: `1px solid ${theme.colors.border}`,
           height: 'fit-content',
+          order: isMobile ? 0 : 1,
+          marginBottom: isMobile ? theme.spacing.md : 0,
         }}>
           <h3 style={{
             fontSize: '16px',
@@ -337,7 +360,7 @@ const WorkspaceView: React.FC = () => {
 
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
+            gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fill, minmax(250px, 1fr))',
             gap: theme.spacing.md,
           }}>
             {[1, 2, 3].map((i) => (

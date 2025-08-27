@@ -138,6 +138,31 @@ button[style*="rgba(239, 68, 68"], button[style*="rgba(220, 38, 38"] {
     padding: 12px !important;
   }
   
+  /* Completely hide desktop sidebar on mobile */
+  [data-sidebar="desktop"] {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    min-width: 0 !important;
+    max-width: 0 !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    position: absolute !important;
+    left: -1000px !important;
+  }
+  
+  /* Ensure main content takes full width on mobile */
+  .dashboard-container > div:last-child {
+    width: 100% !important;
+    flex: 1 !important;
+  }
+  
+  /* Force hide any sidebar-related elements */
+  aside, nav[role="navigation"], .sidebar, .sidebar-desktop {
+    display: none !important;
+  }
+  
   /* Mobile specific adjustments */
   .mobile-glass-container {
     margin: 0 !important;
@@ -228,6 +253,16 @@ button[style*="rgba(239, 68, 68"], button[style*="rgba(220, 38, 38"] {
 
 /* Mobile portrait */
 @media (max-width: 480px) {
+  /* Ensure sidebar is completely hidden on small screens */
+  [data-sidebar="desktop"], aside, nav[role="navigation"], .sidebar, .sidebar-desktop {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    opacity: 0 !important;
+    position: absolute !important;
+    left: -1000px !important;
+  }
+  
   /* Further reduce spacing */
   .glass-container {
     margin: 0 !important;

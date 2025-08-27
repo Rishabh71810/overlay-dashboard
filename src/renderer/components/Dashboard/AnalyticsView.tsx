@@ -1,13 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { TrendingUp, Users, Clock, Target, BarChart3, PieChart, Activity } from 'lucide-react';
 import theme from '../../styles/theme';
 
 const AnalyticsView: React.FC = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check if mobile on mount and window resize
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   return (
     <div>
       <h1 style={{ 
-        fontSize: '24px', 
+        fontSize: isMobile ? '20px' : '24px', 
         fontWeight: 600, 
         color: theme.colors.text.primary, 
         marginBottom: theme.spacing.lg 
@@ -18,7 +31,7 @@ const AnalyticsView: React.FC = () => {
       {/* Key Metrics */}
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(4, 1fr)',
+        gridTemplateColumns: isMobile ? '1fr' : 'repeat(4, 1fr)',
         gap: theme.spacing.md,
         marginBottom: theme.spacing.xl,
       }}>
@@ -32,11 +45,11 @@ const AnalyticsView: React.FC = () => {
           return (
             <motion.div
               key={metric.label}
-              whileHover={{ scale: 1.02 }}
+              whileHover={{ scale: isMobile ? 1 : 1.02 }}
               style={{
                 background: theme.colors.backgroundWhite,
                 borderRadius: theme.borderRadius.lg,
-                padding: '20px',
+                padding: isMobile ? '16px' : '20px',
                 border: `1px solid ${theme.colors.border}`,
                 position: 'relative',
                 overflow: 'hidden',
@@ -62,15 +75,15 @@ const AnalyticsView: React.FC = () => {
                 position: 'relative',
               }}>
                 <div style={{
-                  width: '40px',
-                  height: '40px',
+                  width: isMobile ? '36px' : '40px',
+                  height: isMobile ? '36px' : '40px',
                   borderRadius: theme.borderRadius.md,
                   background: theme.colors.background,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                 }}>
-                  <Icon size={24} color={theme.colors.text.primary} />
+                  <Icon size={isMobile ? 20 : 24} color={theme.colors.text.primary} />
                 </div>
                 <span style={{
                   fontSize: '12px',
@@ -88,7 +101,7 @@ const AnalyticsView: React.FC = () => {
                 </span>
               </div>
               <div style={{ 
-                fontSize: '24px', 
+                fontSize: isMobile ? '20px' : '24px', 
                 fontWeight: 600, 
                 color: theme.colors.text.primary, 
                 marginBottom: '4px' 
@@ -96,7 +109,7 @@ const AnalyticsView: React.FC = () => {
                 {metric.value}
               </div>
               <div style={{ 
-                fontSize: '14px', 
+                fontSize: isMobile ? '13px' : '14px', 
                 color: theme.colors.text.secondary 
               }}>
                 {metric.label}
@@ -109,7 +122,7 @@ const AnalyticsView: React.FC = () => {
       {/* Charts Section */}
       <div style={{
         display: 'grid',
-        gridTemplateColumns: '2fr 1fr',
+        gridTemplateColumns: isMobile ? '1fr' : '2fr 1fr',
         gap: theme.spacing.lg,
         marginBottom: theme.spacing.xl,
       }}>
@@ -117,7 +130,7 @@ const AnalyticsView: React.FC = () => {
         <div style={{
           background: theme.colors.backgroundWhite,
           borderRadius: theme.borderRadius.lg,
-          padding: '20px',
+          padding: isMobile ? '16px' : '20px',
           border: `1px solid ${theme.colors.border}`,
         }}>
           <div style={{
@@ -138,13 +151,13 @@ const AnalyticsView: React.FC = () => {
           
           {/* Placeholder for chart */}
           <div style={{
-            height: '250px',
+            height: isMobile ? '200px' : '250px',
             background: `linear-gradient(180deg, ${theme.colors.background} 0%, transparent 100%)`,
             borderRadius: theme.borderRadius.md,
             display: 'flex',
             alignItems: 'flex-end',
-            padding: '20px',
-            gap: '8px',
+            padding: isMobile ? '10px' : '20px',
+            gap: isMobile ? '4px' : '8px',
           }}>
             {[40, 65, 45, 70, 85, 90, 75, 88, 92, 85, 95, 89].map((height, i) => (
               <div
@@ -193,7 +206,7 @@ const AnalyticsView: React.FC = () => {
         <div style={{
           background: theme.colors.backgroundWhite,
           borderRadius: theme.borderRadius.lg,
-          padding: '20px',
+          padding: isMobile ? '16px' : '20px',
           border: `1px solid ${theme.colors.border}`,
         }}>
           <div style={{
@@ -263,7 +276,7 @@ const AnalyticsView: React.FC = () => {
       <div style={{
         background: theme.colors.backgroundWhite,
         borderRadius: theme.borderRadius.lg,
-        padding: '20px',
+        padding: isMobile ? '16px' : '20px',
         border: `1px solid ${theme.colors.border}`,
       }}>
         <h3 style={{ 
@@ -277,7 +290,7 @@ const AnalyticsView: React.FC = () => {
         
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+          gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(200px, 1fr))',
           gap: theme.spacing.md,
         }}>
           {[
@@ -302,14 +315,14 @@ const AnalyticsView: React.FC = () => {
                 marginBottom: theme.spacing.md,
               }}>
                 <div style={{
-                  width: '40px',
-                  height: '40px',
+                  width: isMobile ? '36px' : '40px',
+                  height: isMobile ? '36px' : '40px',
                   borderRadius: '50%',
                   background: theme.colors.text.primary,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  fontSize: '20px',
+                  fontSize: isMobile ? '18px' : '20px',
                 }}>
                   {member.avatar}
                 </div>

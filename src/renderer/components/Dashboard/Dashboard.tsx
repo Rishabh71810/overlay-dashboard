@@ -41,8 +41,16 @@ const Dashboard: React.FC = () => {
     };
     
     checkMobile();
+    // Use both resize and orientationchange for better mobile detection
     window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    window.addEventListener('orientationchange', () => {
+      setTimeout(checkMobile, 100); // Small delay for orientation change
+    });
+    
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+      window.removeEventListener('orientationchange', checkMobile);
+    };
   }, []);
 
   const navigationItems = [
@@ -69,7 +77,7 @@ const Dashboard: React.FC = () => {
   };
 
   return (
-    <div style={{
+    <div className="dashboard-container" style={{
       display: 'flex',
       height: '100vh',
       background: theme.colors.background,
@@ -227,27 +235,25 @@ const Dashboard: React.FC = () => {
         </div>
       )}
 
-      {/* Sidebar */}
-      <motion.div
-        animate={{ 
-          width: isMobile ? 0 : (sidebarCollapsed ? 60 : 240)
-        }}
-        transition={{ duration: 0.3 }}
-        className={isMobile ? `mobile-sidebar ${mobileMenuOpen ? 'open' : ''}` : ''}
-        style={{
-          background: 'linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04))',
-          border: 'none',
-          borderRadius: theme.borderRadius.lg,
-          display: 'flex',
-          flexDirection: 'column',
-          overflow: 'hidden',
-          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.3)',
-          height: 'calc(100vh - 24px)',
-          ...(isMobile && {
-            display: 'none',
-          }),
-        }}
-      >
+      {/* Sidebar - Only visible on desktop */}
+      {!isMobile && (
+        <motion.div
+          data-sidebar="desktop"
+          animate={{ 
+            width: sidebarCollapsed ? 60 : 240
+          }}
+          transition={{ duration: 0.3 }}
+          style={{
+            background: 'linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04))',
+            border: 'none',
+            borderRadius: theme.borderRadius.lg,
+            display: 'flex',
+            flexDirection: 'column',
+            overflow: 'hidden',
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.3)',
+            height: 'calc(100vh - 24px)',
+          }}
+        >
         {/* Logo Container with Glassmorphic Effect */}
         <div style={{
           padding: '20px',
@@ -406,6 +412,7 @@ const Dashboard: React.FC = () => {
           </div>
         </div>
       </motion.div>
+      )}
 
       {/* Main Content */}
       <div style={{ 
@@ -428,7 +435,7 @@ const Dashboard: React.FC = () => {
           alignItems: 'center',
           boxShadow: '0 4px 16px rgba(0, 0, 0, 0.2)',
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? '12px' : '24px' }}>
             <button
               onClick={() => isMobile ? setMobileMenuOpen(!mobileMenuOpen) : setSidebarCollapsed(!sidebarCollapsed)}
               style={{
@@ -444,6 +451,54 @@ const Dashboard: React.FC = () => {
               <LayoutDashboard size={20} color={theme.colors.text.secondary} />
               )}
             </button>
+            
+            {/* Mobile Logo in Header with Glassmorphic Container */}
+            {isMobile && (
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '8px 12px',
+                background: 'linear-gradient(145deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.10))',
+                backdropFilter: 'blur(12px) saturate(180%)',
+                WebkitBackdropFilter: 'blur(12px) saturate(180%)',
+                border: '1px solid rgba(255, 255, 255, 0.3)',
+                borderRadius: '14px',
+                boxShadow: '0 8px 24px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.4)',
+                position: 'relative',
+              }}>
+                <img 
+                  src={decisionAiLogo}
+                  alt="MyDecisions Logo"
+                  style={{
+                    width: '24px',
+                    height: '24px',
+                    objectFit: 'contain',
+                    filter: 'brightness(1.2)',
+                  }}
+                />
+                <div style={{
+                  fontSize: '14px',
+                  fontWeight: 700,
+                  color: '#ffffff',
+                  textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)',
+                  letterSpacing: '0.3px',
+                }}>
+                  My<span style={{ color: theme.colors.text.red }}>Decisions</span>
+                </div>
+                
+                {/* Shine Effect */}
+                <div style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  height: '1px',
+                  background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent)',
+                  borderRadius: '14px 14px 0 0',
+                }} />
+              </div>
+            )}
             
             {!isMobile && (
             <div style={{
@@ -474,9 +529,9 @@ const Dashboard: React.FC = () => {
             )}
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? '8px' : '16px' }}>
             <button style={{
-              padding: '8px 16px',
+              padding: isMobile ? '8px' : '8px 16px',
               background: theme.colors.button.primary,
               backdropFilter: 'blur(20px)',
               WebkitBackdropFilter: 'blur(20px)',
@@ -493,7 +548,7 @@ const Dashboard: React.FC = () => {
               textShadow: '0 1px 2px rgba(0, 0, 0, 0.5)',
             }}>
               <Plus size={16} />
-              New Decision
+              {!isMobile && 'New Decision'}
             </button>
             
             <button style={{

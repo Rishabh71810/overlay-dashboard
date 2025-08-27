@@ -128,15 +128,17 @@ const HistoryView: React.FC = () => {
 
         <button style={{
           padding: '10px 16px',
-          background: theme.colors.backgroundWhite,
-          border: `1px solid ${theme.colors.border}`,
+          background: 'rgba(255, 255, 255, 0.1)',
+          border: `1px solid rgba(255, 255, 255, 0.2)`,
           borderRadius: theme.borderRadius.md,
           cursor: 'pointer',
           display: 'flex',
           alignItems: 'center',
           gap: '8px',
           fontSize: '14px',
-          color: theme.colors.text.primary,
+          color: '#ffffff',
+          fontWeight: 500,
+          textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)',
         }}>
           <Filter size={16} />
           More Filters
@@ -144,8 +146,8 @@ const HistoryView: React.FC = () => {
 
         <button style={{
           padding: '10px 16px',
-          background: theme.colors.text.primary,
-          color: theme.colors.backgroundWhite,
+          background: theme.colors.text.red,
+          color: '#ffffff',
           border: 'none',
           borderRadius: theme.borderRadius.md,
           cursor: 'pointer',
@@ -153,6 +155,8 @@ const HistoryView: React.FC = () => {
           alignItems: 'center',
           gap: '8px',
           fontSize: '14px',
+          fontWeight: 600,
+          textShadow: '0 1px 2px rgba(0, 0, 0, 0.5)',
         }}>
           <Download size={16} />
           Export
@@ -274,15 +278,17 @@ const HistoryView: React.FC = () => {
                 <td style={{ padding: '16px' }}>
                   <button style={{
                     padding: '6px 12px',
-                    background: 'transparent',
-                    border: `1px solid ${theme.colors.border}`,
+                    background: 'rgba(255, 255, 255, 0.08)',
+                    border: `1px solid rgba(255, 255, 255, 0.2)`,
                     borderRadius: theme.borderRadius.sm,
                     cursor: 'pointer',
                     display: 'flex',
                     alignItems: 'center',
                     gap: '4px',
                     fontSize: '13px',
-                    color: theme.colors.text.secondary,
+                    color: '#ffffff',
+                    fontWeight: 500,
+                    textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)',
                     transition: 'all 0.2s ease',
                   }}>
                     <Eye size={14} />

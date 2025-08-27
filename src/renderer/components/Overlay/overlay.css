@@ -292,7 +292,548 @@
   height: 100%;
 }
 
-/* Glass Cards */
+/* Enhanced Polished Cards */
+.polished-card {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  backdrop-filter: blur(25px) saturate(180%);
+  -webkit-backdrop-filter: blur(25px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 16px;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    0 2px 8px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 0 40px rgba(255, 255, 255, 0.05);
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.polished-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.polished-card:hover::before {
+  opacity: 1;
+}
+
+.polished-card:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0.12) 50%,
+    rgba(255, 255, 255, 0.08) 100%
+  );
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 
+    0 16px 48px rgba(0, 0, 0, 0.15),
+    0 8px 16px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 0 60px rgba(255, 255, 255, 0.08);
+}
+
+/* Card Headers */
+.card-header {
+  padding: 12px 16px 8px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  z-index: 2;
+}
+
+.card-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.3px;
+}
+
+.card-content {
+  padding: 12px 16px 16px 16px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Specialized Card Styles */
+.pipeline-card {
+  background: linear-gradient(
+    135deg,
+    rgba(99, 102, 241, 0.15) 0%,
+    rgba(139, 92, 246, 0.1) 50%,
+    rgba(217, 70, 239, 0.08) 100%
+  );
+}
+
+.context-card {
+  background: linear-gradient(
+    135deg,
+    rgba(34, 197, 94, 0.12) 0%,
+    rgba(22, 163, 74, 0.08) 50%,
+    rgba(15, 118, 110, 0.06) 100%
+  );
+}
+
+.analysis-card {
+  background: linear-gradient(
+    135deg,
+    rgba(251, 146, 60, 0.12) 0%,
+    rgba(249, 115, 22, 0.08) 50%,
+    rgba(234, 88, 12, 0.06) 100%
+  );
+}
+
+.chat-card {
+  background: linear-gradient(
+    135deg,
+    rgba(168, 85, 247, 0.12) 0%,
+    rgba(147, 51, 234, 0.08) 50%,
+    rgba(126, 34, 206, 0.06) 100%
+  );
+}
+
+/* Metric Cards */
+.metric-card {
+  padding: 12px 8px !important;
+  text-align: center;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.06) 100%
+  );
+  border-radius: 12px;
+  min-height: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.metric-value {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 2px;
+  line-height: 1;
+}
+
+.metric-label {
+  font-size: 10px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.metric-value.confidence {
+  color: #10b981;
+}
+
+.metric-value.bias {
+  color: #f59e0b;
+}
+
+.metric-value.alignment {
+  color: #ef4444;
+}
+
+.confidence-card:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(16, 185, 129, 0.15) 0%,
+    rgba(5, 150, 105, 0.1) 100%
+  );
+}
+
+.bias-card:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(245, 158, 11, 0.15) 0%,
+    rgba(217, 119, 6, 0.1) 100%
+  );
+}
+
+.alignment-card:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(239, 68, 68, 0.15) 0%,
+    rgba(220, 38, 38, 0.1) 100%
+  );
+}
+
+/* Polished Input Field */
+.polished-input {
+  width: 100%;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 10px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.9) !important;
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.polished-input:focus {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(99, 102, 241, 0.4) !important;
+  box-shadow: 
+    0 0 0 3px rgba(99, 102, 241, 0.1),
+    0 4px 16px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+  outline: none;
+}
+
+.polished-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Navigation Tabs */
+.overlay-nav-tabs {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.nav-tab {
+  transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+}
+
+.nav-tab:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.nav-tab.active {
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Specialized Mode Card Styles */
+.analytics-primary-card {
+  background: linear-gradient(
+    135deg,
+    rgba(16, 185, 129, 0.12) 0%,
+    rgba(5, 150, 105, 0.08) 50%,
+    rgba(4, 120, 87, 0.06) 100%
+  ) !important;
+}
+
+.session-card {
+  background: linear-gradient(
+    135deg,
+    rgba(59, 130, 246, 0.12) 0%,
+    rgba(37, 99, 235, 0.08) 50%,
+    rgba(29, 78, 216, 0.06) 100%
+  ) !important;
+}
+
+.members-card {
+  background: linear-gradient(
+    135deg,
+    rgba(168, 85, 247, 0.12) 0%,
+    rgba(147, 51, 234, 0.08) 50%,
+    rgba(126, 34, 206, 0.06) 100%
+  ) !important;
+}
+
+.voting-card {
+  background: linear-gradient(
+    135deg,
+    rgba(34, 197, 94, 0.12) 0%,
+    rgba(22, 163, 74, 0.08) 50%,
+    rgba(21, 128, 61, 0.06) 100%
+  ) !important;
+}
+
+.ideas-card {
+  background: linear-gradient(
+    135deg,
+    rgba(245, 158, 11, 0.12) 0%,
+    rgba(217, 119, 6, 0.08) 50%,
+    rgba(180, 83, 9, 0.06) 100%
+  ) !important;
+}
+
+.meeting-status-card {
+  background: linear-gradient(
+    135deg,
+    rgba(239, 68, 68, 0.12) 0%,
+    rgba(220, 38, 38, 0.08) 50%,
+    rgba(185, 28, 28, 0.06) 100%
+  ) !important;
+}
+
+.speaking-time-card {
+  background: linear-gradient(
+    135deg,
+    rgba(99, 102, 241, 0.12) 0%,
+    rgba(79, 70, 229, 0.08) 50%,
+    rgba(67, 56, 202, 0.06) 100%
+  ) !important;
+}
+
+.coverage-card {
+  background: linear-gradient(
+    135deg,
+    rgba(16, 185, 129, 0.12) 0%,
+    rgba(5, 150, 105, 0.08) 50%,
+    rgba(4, 120, 87, 0.06) 100%
+  ) !important;
+}
+
+.notes-card {
+  background: linear-gradient(
+    135deg,
+    rgba(156, 163, 175, 0.12) 0%,
+    rgba(107, 114, 128, 0.08) 50%,
+    rgba(75, 85, 99, 0.06) 100%
+  ) !important;
+}
+
+.quick-input-card {
+  background: linear-gradient(
+    135deg,
+    rgba(168, 85, 247, 0.12) 0%,
+    rgba(147, 51, 234, 0.08) 50%,
+    rgba(126, 34, 206, 0.06) 100%
+  ) !important;
+}
+
+.verdict-card {
+  background: linear-gradient(
+    135deg,
+    rgba(16, 185, 129, 0.15) 0%,
+    rgba(5, 150, 105, 0.1) 50%,
+    rgba(4, 120, 87, 0.08) 100%
+  ) !important;
+  border: 1px solid rgba(16, 185, 129, 0.2) !important;
+}
+
+.action-card {
+  background: linear-gradient(
+    135deg,
+    rgba(156, 163, 175, 0.1) 0%,
+    rgba(107, 114, 128, 0.06) 100%
+  ) !important;
+  min-height: 70px !important;
+}
+
+.recent-card {
+  background: linear-gradient(
+    135deg,
+    rgba(99, 102, 241, 0.1) 0%,
+    rgba(79, 70, 229, 0.06) 100%
+  ) !important;
+}
+
+.risk-card {
+  background: linear-gradient(
+    135deg,
+    rgba(245, 158, 11, 0.12) 0%,
+    rgba(217, 119, 6, 0.08) 100%
+  ) !important;
+}
+
+.timeline-card {
+  background: linear-gradient(
+    135deg,
+    rgba(168, 85, 247, 0.12) 0%,
+    rgba(147, 51, 234, 0.08) 100%
+  ) !important;
+}
+
+.history-card {
+  background: linear-gradient(
+    135deg,
+    rgba(16, 185, 129, 0.1) 0%,
+    rgba(5, 150, 105, 0.06) 100%
+  ) !important;
+}
+
+.stakeholder-card {
+  background: linear-gradient(
+    135deg,
+    rgba(59, 130, 246, 0.1) 0%,
+    rgba(37, 99, 235, 0.06) 100%
+  ) !important;
+}
+
+/* Enhanced Button Styles for Mode-specific Actions */
+.polished-card button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.polished-card button:hover {
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.polished-card button:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Status Indicators */
+.status-indicator {
+  position: relative;
+}
+
+.status-indicator.active::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -12px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 8px #10b981;
+  animation: pulse-glow 2s infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 8px #10b981;
+  }
+  50% {
+    opacity: 0.7;
+    box-shadow: 0 0 16px #10b981;
+  }
+}
+
+/* Progress Bars */
+.progress-bar {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #10b981, #059669);
+  transition: width 0.3s ease;
+}
+
+/* Cards Container Scrollbar */
+.cards-container::-webkit-scrollbar {
+  width: 4px;
+}
+
+.cards-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.cards-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+}
+
+.cards-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Specific Overlay Mode Styles */
+.minimal-overlay.collapsed {
+  background: linear-gradient(135deg, 
+    rgba(16, 185, 129, 0.9) 0%, 
+    rgba(5, 150, 105, 0.9) 50%,
+    rgba(4, 120, 87, 0.9) 100%) !important;
+}
+
+.focus-overlay.collapsed {
+  background: linear-gradient(135deg, 
+    rgba(99, 102, 241, 0.9) 0%, 
+    rgba(79, 70, 229, 0.9) 50%,
+    rgba(67, 56, 202, 0.9) 100%) !important;
+}
+
+.dashboard-overlay.collapsed {
+  background: linear-gradient(135deg, 
+    rgba(59, 130, 246, 0.9) 0%, 
+    rgba(37, 99, 235, 0.9) 50%,
+    rgba(29, 78, 216, 0.9) 100%) !important;
+}
+
+.analytics-overlay.collapsed {
+  background: linear-gradient(135deg, 
+    rgba(245, 158, 11, 0.9) 0%, 
+    rgba(217, 119, 6, 0.9) 50%,
+    rgba(180, 83, 9, 0.9) 100%) !important;
+}
+
+.collaboration-overlay.collapsed {
+  background: linear-gradient(135deg, 
+    rgba(168, 85, 247, 0.9) 0%, 
+    rgba(147, 51, 234, 0.9) 50%,
+    rgba(126, 34, 206, 0.9) 100%) !important;
+}
+
+.meeting-overlay.collapsed {
+  background: linear-gradient(135deg, 
+    rgba(239, 68, 68, 0.9) 0%, 
+    rgba(220, 38, 38, 0.9) 50%,
+    rgba(185, 28, 28, 0.9) 100%) !important;
+}
+
+.quick-overlay.collapsed {
+  background: linear-gradient(135deg, 
+    rgba(251, 146, 60, 0.9) 0%, 
+    rgba(249, 115, 22, 0.9) 50%,
+    rgba(234, 88, 12, 0.9) 100%) !important;
+}
+
+/* Minimal Overlay Specific Styles */
+.minimal-collapsed-content {
+  color: white;
+  font-weight: 600;
+}
+
+.minimal-expanded-content {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+}
+
+/* Focus Overlay Specific Styles */
+.focus-overlay .progress-bar {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.focus-overlay .progress-fill {
+  background: linear-gradient(90deg, #10b981, #059669);
+  transition: width 1s ease-out;
+}
+
+/* Legacy Glass Card Support */
 .glass-card {
   background: linear-gradient(
     135deg,
@@ -320,7 +861,26 @@
   transform: translateY(-2px);
 }
 
-/* Responsive Styles */
+/* =========================
+   MOBILE RESPONSIVE STYLES
+   ========================= */
+
+/* Tablet and below */
+@media (max-width: 1024px) {
+  .decision-hub {
+    max-width: 90vw !important;
+  }
+  
+  .polished-card {
+    padding: 12px !important;
+  }
+  
+  .metric-card {
+    min-height: 50px !important;
+  }
+}
+
+/* Mobile landscape and below */
 @media (max-width: 768px) {
   .decision-hub.expanded {
     width: 100vw !important;
@@ -330,6 +890,258 @@
     right: 0 !important;
     bottom: 0 !important;
     border-radius: 0 !important;
+    max-width: none !important;
+    max-height: none !important;
+  }
+  
+  .decision-hub.collapsed {
+    width: auto !important;
+    min-width: 60px !important;
+    padding: 8px 12px !important;
+    font-size: 12px !important;
+    bottom: 20px !important;
+    right: 20px !important;
+  }
+  
+  /* Fix input fields on mobile */
+  .polished-input {
+    font-size: 16px !important; /* Prevents zoom on iOS */
+    padding: 10px 12px !important;
+  }
+  
+  /* Fix buttons on mobile */
+  .decision-hub button {
+    min-height: 44px !important;
+    padding: 10px 16px !important;
+    font-size: 14px !important;
+  }
+  
+  /* Fix cards on mobile */
+  .polished-card {
+    margin-bottom: 12px !important;
+    padding: 16px !important;
+  }
+  
+  /* Stack metric cards vertically on small screens */
+  .metric-cards-container {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+  }
+  
+  /* Fix navigation tabs */
+  .overlay-nav-tabs {
+    flex-wrap: wrap !important;
+    gap: 4px !important;
+  }
+  
+  .nav-tab {
+    flex: 1 1 auto !important;
+    min-width: 80px !important;
+    padding: 8px 12px !important;
+    font-size: 12px !important;
+  }
+  
+  /* Fix chat messages */
+  .message-bubble {
+    max-width: 85% !important;
+    font-size: 14px !important;
+  }
+  
+  /* Hide scrollbars on mobile */
+  .decision-hub ::-webkit-scrollbar {
+    display: none !important;
+  }
+  
+  /* Fix modal positioning */
+  .modal, .overlay-modal {
+    margin: 0 !important;
+    border-radius: 0 !important;
+  }
+  
+  /* Fix text sizes */
+  .card-title {
+    font-size: 14px !important;
+  }
+  
+  .card-content {
+    font-size: 13px !important;
+  }
+  
+  .metric-value {
+    font-size: 16px !important;
+  }
+  
+  .metric-label {
+    font-size: 10px !important;
+  }
+}
+
+/* Mobile portrait */
+@media (max-width: 480px) {
+  /* Ensure full screen overlay on small devices */
+  .decision-hub.expanded {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+  
+  /* Compact collapsed state */
+  .decision-hub.collapsed {
+    bottom: 15px !important;
+    right: 15px !important;
+    padding: 6px 10px !important;
+    font-size: 11px !important;
+  }
+  
+  /* Reduce padding on all elements */
+  .expanded-content {
+    padding: 12px !important;
+  }
+  
+  .polished-card {
+    padding: 12px !important;
+    border-radius: 12px !important;
+  }
+  
+  .card-header {
+    padding: 10px 12px 8px 12px !important;
+  }
+  
+  .card-content {
+    padding: 10px 12px 12px 12px !important;
+  }
+  
+  /* Compact buttons */
+  .decision-hub button {
+    padding: 8px 12px !important;
+    font-size: 13px !important;
+  }
+  
+  /* Compact input fields */
+  .polished-input {
+    padding: 8px 10px !important;
+    font-size: 16px !important;
+  }
+  
+  /* Stack everything vertically */
+  .grid, .flex-row {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+  
+  /* Fix metric cards */
+  .metric-card {
+    padding: 10px 8px !important;
+    min-height: 45px !important;
+  }
+  
+  .metric-value {
+    font-size: 14px !important;
+  }
+  
+  .metric-label {
+    font-size: 9px !important;
+  }
+  
+  /* Fix navigation */
+  .nav-tab {
+    padding: 6px 10px !important;
+    font-size: 11px !important;
+  }
+  
+  /* Optimize chat area */
+  .chat-container {
+    min-height: 200px !important;
+  }
+  
+  .message-bubble {
+    padding: 8px 10px !important;
+    font-size: 13px !important;
+  }
+  
+  /* Remove animations for performance */
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 375px) {
+  /* Ultra compact mode */
+  .decision-hub.collapsed {
+    bottom: 10px !important;
+    right: 10px !important;
+    padding: 5px 8px !important;
+    font-size: 10px !important;
+    min-width: 50px !important;
+  }
+  
+  .expanded-content {
+    padding: 10px !important;
+  }
+  
+  .polished-card {
+    padding: 10px !important;
+  }
+  
+  /* Smaller text */
+  .card-title {
+    font-size: 12px !important;
+  }
+  
+  .card-content {
+    font-size: 11px !important;
+  }
+  
+  /* Compact buttons */
+  button {
+    padding: 6px 10px !important;
+    font-size: 12px !important;
+    min-height: 36px !important;
+  }
+  
+  /* Compact inputs */
+  input, textarea {
+    padding: 6px 8px !important;
+    font-size: 16px !important; /* Keep 16px to prevent zoom */
+  }
+}
+
+/* Fix for iOS safe areas */
+@supports (padding: max(0px)) {
+  .decision-hub.expanded {
+    padding-top: max(12px, env(safe-area-inset-top)) !important;
+    padding-bottom: max(12px, env(safe-area-inset-bottom)) !important;
+    padding-left: max(12px, env(safe-area-inset-left)) !important;
+    padding-right: max(12px, env(safe-area-inset-right)) !important;
+  }
+}
+
+/* Touch-friendly interactions */
+@media (hover: none) and (pointer: coarse) {
+  /* Remove hover effects on touch devices */
+  .polished-card:hover,
+  .glass-card:hover,
+  button:hover,
+  .nav-tab:hover {
+    transform: none !important;
+    background: inherit !important;
+  }
+  
+  /* Increase touch targets */
+  button, a, .clickable {
+    min-height: 44px !important;
+    min-width: 44px !important;
+  }
+  
+  /* Disable complex animations */
+  @keyframes glow-shift {
+    0%, 100% {
+      transform: none;
+    }
   }
 }
 

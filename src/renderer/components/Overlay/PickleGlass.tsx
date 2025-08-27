@@ -116,20 +116,18 @@ export const PickleGlassOverlay: React.FC<PickleGlassOverlayProps> = ({
     <motion.div
       className={`pg-overlay ${isExpanded ? 'expanded' : 'collapsed'}`}
       style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        width: '100%',
-        height: '100%',
+        position: 'fixed',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        zIndex: 10000,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
       }}
       animate={{
-        width: '100%',
-        height: '100%',
+        width: typeof width === 'number' ? `${width}px` : width,
+        height: typeof height === 'number' ? `${height}px` : height,
       }}
       transition={{
         type: 'spring',
@@ -139,8 +137,8 @@ export const PickleGlassOverlay: React.FC<PickleGlassOverlayProps> = ({
     >
       <div className="pg-glow" />
       <div style={{
-        width: typeof width === 'number' ? `${width}px` : width,
-        height: typeof height === 'number' ? `${height}px` : height,
+        width: '100%',
+        height: '100%',
         position: 'relative',
       }}>
         {children}

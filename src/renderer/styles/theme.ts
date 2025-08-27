@@ -1,40 +1,50 @@
-// Theme colors from waitlist website
+// Glassmorphic Black & Red Theme
 export const theme = {
   colors: {
-    // Primary colors from waitlist
-    background: '#efeee7', // Beige background
-    backgroundWhite: '#ffffff',
+    // Dark gradient background
+    background: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 25%, #2a0a0a 50%, #1a0505 75%, #0a0a0a 100%)',
+    backgroundSolid: '#0a0a0a',
+    backgroundWhite: 'rgba(255, 255, 255, 0.05)',
+    
     text: {
-      primary: '#000000', // Black text
-      secondary: '#6B7280', // Gray text
-      muted: '#9CA3AF',
-      red: '#EF4444', // Red accent for "decisions"
+      primary: '#ffffff', // White text for dark background
+      secondary: '#a1a1aa', // Light gray
+      muted: '#71717a',
+      red: '#dc2626', // Darker red for better contrast
+      orange: '#f97316',
+    },
+    
+    // Enhanced Glossy Glass morphism colors
+    glass: {
+      primary: 'linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05))',
+      secondary: 'linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04))',
+      border: 'rgba(255, 255, 255, 0.25)',
+      borderSoft: 'rgba(255, 255, 255, 0.15)',
+      red: 'linear-gradient(135deg, rgba(239, 68, 68, 0.18), rgba(239, 68, 68, 0.08))',
+      redBorder: 'rgba(239, 68, 68, 0.4)',
     },
     
     // UI colors
-    border: '#E5E7EB',
-    borderDark: '#D1D5DB',
+    border: 'rgba(255, 255, 255, 0.1)',
+    borderDark: 'rgba(255, 255, 255, 0.05)',
     
     // Button colors
     button: {
-      primary: '#000000', // Black button
-      primaryHover: '#1F2937',
-      secondary: '#ffffff',
-      secondaryHover: '#F9FAFB',
+      primary: '#dc2626', // Darker red for better contrast
+      primaryHover: '#b91c1c',
+      secondary: 'rgba(255, 255, 255, 0.15)',
+      secondaryHover: 'rgba(255, 255, 255, 0.25)',
     },
     
-    // Status colors
-    success: '#10B981',
-    warning: '#F59E0B',
-    error: '#EF4444',
-    info: '#3B82F6',
-    
-    // Glass morphism for overlay
-    glass: {
-      background: 'rgba(239, 238, 231, 0.95)', // Beige with transparency
-      backgroundDark: 'rgba(0, 0, 0, 0.85)',
-      border: 'rgba(0, 0, 0, 0.1)',
-    }
+    // Status colors with glass effect
+    success: '#10b981',
+    successGlass: 'rgba(16, 185, 129, 0.2)',
+    warning: '#f59e0b',
+    warningGlass: 'rgba(245, 158, 11, 0.2)',
+    error: '#ef4444',
+    errorGlass: 'rgba(239, 68, 68, 0.2)',
+    info: '#3b82f6',
+    infoGlass: 'rgba(59, 130, 246, 0.2)',
   },
   
   fonts: {

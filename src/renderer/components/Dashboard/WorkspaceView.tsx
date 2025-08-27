@@ -63,8 +63,8 @@ const WorkspaceView: React.FC = () => {
         </h1>
         <button style={{
           padding: '10px 20px',
-          background: theme.colors.button.primary,
-          color: theme.colors.backgroundWhite,
+          background: theme.colors.text.red,
+          color: '#ffffff',
           border: 'none',
           borderRadius: theme.borderRadius.md,
           cursor: 'pointer',
@@ -72,7 +72,8 @@ const WorkspaceView: React.FC = () => {
           alignItems: 'center',
           gap: theme.spacing.sm,
           fontSize: '14px',
-          fontWeight: 500,
+          fontWeight: 600,
+          textShadow: '0 1px 2px rgba(0, 0, 0, 0.5)',
         }}>
           <Plus size={16} />
           Create Workspace
@@ -198,42 +199,47 @@ const WorkspaceView: React.FC = () => {
                     }}>
                       <button style={{
                         padding: '6px 12px',
-                        background: theme.colors.button.primary,
-                        color: theme.colors.backgroundWhite,
+                        background: theme.colors.text.red,
+                        color: '#ffffff',
                         border: 'none',
                         borderRadius: theme.borderRadius.md,
                         cursor: 'pointer',
                         fontSize: '13px',
-                        fontWeight: 500,
+                        fontWeight: 600,
+                        textShadow: '0 1px 2px rgba(0, 0, 0, 0.5)',
                       }}>
                         Enter Workspace
                       </button>
                       <button style={{
                         padding: '6px 12px',
-                        background: 'transparent',
-                        color: theme.colors.text.secondary,
-                        border: `1px solid ${theme.colors.border}`,
+                        background: 'rgba(255, 255, 255, 0.1)',
+                        color: '#ffffff',
+                        border: `1px solid rgba(255, 255, 255, 0.2)`,
                         borderRadius: theme.borderRadius.md,
                         cursor: 'pointer',
                         fontSize: '13px',
+                        fontWeight: 500,
                         display: 'flex',
                         alignItems: 'center',
                         gap: '4px',
+                        textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)',
                       }}>
                         <Video size={14} />
                         Join Meeting
                       </button>
                       <button style={{
                         padding: '6px 12px',
-                        background: 'transparent',
-                        color: theme.colors.text.secondary,
-                        border: `1px solid ${theme.colors.border}`,
+                        background: 'rgba(255, 255, 255, 0.1)',
+                        color: '#ffffff',
+                        border: `1px solid rgba(255, 255, 255, 0.2)`,
                         borderRadius: theme.borderRadius.md,
                         cursor: 'pointer',
                         fontSize: '13px',
+                        fontWeight: 500,
                         display: 'flex',
                         alignItems: 'center',
                         gap: '4px',
+                        textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)',
                       }}>
                         <MessageSquare size={14} />
                         Chat
@@ -379,12 +385,14 @@ const WorkspaceView: React.FC = () => {
                   </span>
                   <button style={{
                     padding: '4px 8px',
-                    background: theme.colors.button.primary,
-                    color: theme.colors.backgroundWhite,
+                    background: theme.colors.text.red,
+                    color: '#ffffff',
                     border: 'none',
                     borderRadius: theme.borderRadius.sm,
                     cursor: 'pointer',
                     fontSize: '12px',
+                    fontWeight: 600,
+                    textShadow: '0 1px 2px rgba(0, 0, 0, 0.5)',
                   }}>
                     View
                   </button>

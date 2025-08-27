@@ -4,6 +4,14 @@ import theme from '../../styles/theme';
 
 const SettingsView: React.FC = () => {
   const [activeTab, setActiveTab] = useState('general');
+  const [isMobile, setIsMobile] = useState(false);
+
+  React.useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const tabs = [
     { id: 'general', label: 'General', icon: User },
@@ -23,16 +31,23 @@ const SettingsView: React.FC = () => {
 
       <div style={{
         display: 'grid',
-        gridTemplateColumns: '240px 1fr',
-        gap: theme.spacing.lg,
+        gridTemplateColumns: isMobile ? '1fr' : '280px 1fr',
+        gap: isMobile ? '16px' : '24px',
       }}>
         {/* Settings Navigation */}
         <div style={{
-          background: theme.colors.backgroundWhite,
+          background: 'linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04))',
           borderRadius: theme.borderRadius.lg,
-          padding: theme.spacing.sm,
-          border: `1px solid ${theme.colors.border}`,
+          padding: isMobile ? '8px' : '12px',
+          border: 'none',
+          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.25)',
           height: 'fit-content',
+          ...(isMobile && {
+            order: 2,
+            display: 'flex',
+            overflowX: 'auto',
+            gap: '8px',
+          }),
         }}>
           {tabs.map((tab) => {
             const Icon = tab.icon;
@@ -48,7 +63,7 @@ const SettingsView: React.FC = () => {
                   marginBottom: '2px',
                   border: 'none',
                   borderRadius: theme.borderRadius.md,
-                  background: isActive ? theme.colors.background : 'transparent',
+                  background: isActive ? theme.colors.glass.red : 'transparent',
                   color: isActive ? theme.colors.text.primary : theme.colors.text.secondary,
                   cursor: 'pointer',
                   display: 'flex',
@@ -68,10 +83,15 @@ const SettingsView: React.FC = () => {
 
         {/* Settings Content */}
         <div style={{
-          background: 'white',
-          borderRadius: '12px',
-          padding: '24px',
-          border: '1px solid #E5E7EB',
+          background: 'linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04))',
+          borderRadius: theme.borderRadius.lg,
+          padding: isMobile ? '20px' : '32px',
+          border: 'none',
+          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.25)',
+          minHeight: isMobile ? '300px' : '500px',
+          ...(isMobile && {
+            order: 1,
+          }),
         }}>
           {activeTab === 'general' && <GeneralSettings />}
           {activeTab === 'notifications' && <NotificationSettings />}
@@ -103,10 +123,12 @@ const GeneralSettings: React.FC = () => (
           style={{
             width: '100%',
             maxWidth: '400px',
-            padding: '8px 12px',
-            border: `1px solid ${theme.colors.border}`,
-            borderRadius: theme.borderRadius.sm,
+            padding: '12px 16px',
+            background: 'linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02))',
+            border: 'none',
+            borderRadius: theme.borderRadius.md,
             fontSize: '14px',
+            color: theme.colors.text.primary,
           }}
         />
       </div>
@@ -121,10 +143,12 @@ const GeneralSettings: React.FC = () => (
           style={{
             width: '100%',
             maxWidth: '400px',
-            padding: '8px 12px',
-            border: `1px solid ${theme.colors.border}`,
-            borderRadius: theme.borderRadius.sm,
+            padding: '12px 16px',
+            background: 'linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02))',
+            border: 'none',
+            borderRadius: theme.borderRadius.md,
             fontSize: '14px',
+            color: theme.colors.text.primary,
           }}
         />
       </div>
@@ -136,11 +160,14 @@ const GeneralSettings: React.FC = () => (
         <select style={{
           width: '100%',
           maxWidth: '400px',
-          padding: '8px 12px',
-          border: '1px solid #E5E7EB',
-          borderRadius: theme.borderRadius.sm,
+          padding: '12px 16px',
+          background: 'rgba(255, 255, 255, 0.02)',
+          backdropFilter: 'blur(8px)',
+          WebkitBackdropFilter: 'blur(8px)',
+          border: `1px solid rgba(255, 255, 255, 0.05)`,
+          borderRadius: theme.borderRadius.md,
           fontSize: '14px',
-          background: 'white',
+          color: theme.colors.text.primary,
         }}>
           <option>Decision Maker</option>
           <option>Analyst</option>
@@ -156,11 +183,14 @@ const GeneralSettings: React.FC = () => (
         <select style={{
           width: '100%',
           maxWidth: '400px',
-          padding: '8px 12px',
-          border: '1px solid #E5E7EB',
-          borderRadius: theme.borderRadius.sm,
+          padding: '12px 16px',
+          background: 'rgba(255, 255, 255, 0.02)',
+          backdropFilter: 'blur(8px)',
+          WebkitBackdropFilter: 'blur(8px)',
+          border: `1px solid rgba(255, 255, 255, 0.05)`,
+          borderRadius: theme.borderRadius.md,
           fontSize: '14px',
-          background: 'white',
+          color: theme.colors.text.primary,
         }}>
           <option>Eastern Time (ET)</option>
           <option>Pacific Time (PT)</option>
@@ -171,14 +201,18 @@ const GeneralSettings: React.FC = () => (
 
       <button style={{
         width: 'fit-content',
-        padding: '8px 20px',
-        background: theme.colors.text.primary,
-        color: theme.colors.backgroundWhite,
-        border: 'none',
-        borderRadius: theme.borderRadius.sm,
+        padding: '12px 24px',
+        background: theme.colors.button.primary,
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
+        color: '#ffffff',
+        border: `1px solid ${theme.colors.glass.redBorder}`,
+        borderRadius: theme.borderRadius.md,
         fontSize: '14px',
-        fontWeight: 500,
+        fontWeight: 600,
         cursor: 'pointer',
+        transition: 'all 0.3s ease',
+        textShadow: '0 1px 2px rgba(0, 0, 0, 0.5)',
       }}>
         Save Changes
       </button>
@@ -222,26 +256,33 @@ const PrivacySettings: React.FC = () => (
 
     <div style={{ display: 'flex', flexDirection: 'column', gap: theme.spacing.md }}>
       <div style={{
-        padding: theme.spacing.md,
-        background: theme.colors.warning + '20',
+        padding: '16px',
+        background: theme.colors.warningGlass,
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)',
         borderRadius: theme.borderRadius.md,
         fontSize: '14px',
         color: theme.colors.warning,
-        border: `1px solid ${theme.colors.warning}30`,
+        border: `1px solid ${theme.colors.warning}40`,
+        boxShadow: '0 2px 12px rgba(245, 158, 11, 0.1)',
       }}>
         ⚠️ Two-factor authentication is not enabled. Enable it for better security.
       </div>
 
       <button style={{
         width: 'fit-content',
-        padding: '8px 20px',
+        padding: '12px 24px',
         background: theme.colors.success,
-        color: theme.colors.backgroundWhite,
-        border: 'none',
-        borderRadius: theme.borderRadius.sm,
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
+        color: '#ffffff',
+        border: `1px solid ${theme.colors.success}`,
+        borderRadius: theme.borderRadius.md,
         fontSize: '14px',
-        fontWeight: 500,
+        fontWeight: 600,
         cursor: 'pointer',
+        transition: 'all 0.3s ease',
+        textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)',
       }}>
         Enable Two-Factor Authentication
       </button>
@@ -275,20 +316,25 @@ const AppearanceSettings: React.FC = () => {
             Theme
           </label>
           <div style={{ display: 'flex', gap: '12px' }}>
-            {['Light', 'Dark', 'Auto'].map((theme) => (
+            {['Light', 'Dark', 'Auto'].map((themeOption) => (
               <button
-                key={theme}
+                key={themeOption}
                 style={{
-                  padding: '8px 16px',
-                  border: `1px solid ${theme.colors.border}`,
-                  borderRadius: theme.borderRadius.sm,
-                  background: theme === 'Light' ? theme.colors.text.primary : theme.colors.backgroundWhite,
-                  color: theme === 'Light' ? theme.colors.backgroundWhite : theme.colors.text.secondary,
+                  padding: '10px 20px',
+                  border: `1px solid ${themeOption === 'Light' ? theme.colors.glass.redBorder : 'rgba(255, 255, 255, 0.3)'}`,
+                  borderRadius: theme.borderRadius.md,
+                  background: themeOption === 'Light' ? theme.colors.text.red : 'rgba(255, 255, 255, 0.1)',
+                  backdropFilter: 'blur(12px)',
+                  WebkitBackdropFilter: 'blur(12px)',
+                  color: '#ffffff',
                   cursor: 'pointer',
                   fontSize: '14px',
+                  fontWeight: 500,
+                  transition: 'all 0.3s ease',
+                  textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)',
                 }}
               >
-                {theme}
+                {themeOption}
               </button>
             ))}
           </div>
@@ -317,12 +363,14 @@ const AppearanceSettings: React.FC = () => {
             onChange={(e) => setOverlayPosition(e.target.value)}
             style={{
               width: '200px',
-              padding: '8px 12px',
-              border: '1px solid #E5E7EB',
-              borderRadius: theme.borderRadius.sm,
+              padding: '12px 16px',
+              background: 'rgba(255, 255, 255, 0.02)',
+              backdropFilter: 'blur(8px)',
+              WebkitBackdropFilter: 'blur(8px)',
+              border: 'none',
+              borderRadius: theme.borderRadius.md,
               fontSize: '14px',
-              background: theme.colors.backgroundWhite,
-            color: theme.colors.text.primary,
+              color: theme.colors.text.primary,
             }}
           >
             <option value="top-left">Top Left</option>
@@ -358,11 +406,13 @@ const IntegrationSettings: React.FC = () => (
         <div
           key={integration.name}
           style={{
-            padding: theme.spacing.md,
-            background: theme.colors.backgroundWhite,
-            border: '1px solid #E5E7EB',
+            padding: '20px',
+            background: 'linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02))',
+            border: 'none',
             borderRadius: theme.borderRadius.md,
             textAlign: 'center',
+            transition: 'all 0.3s ease',
+            cursor: 'pointer',
           }}
         >
           <div style={{ fontSize: '32px', marginBottom: '8px' }}>{integration.icon}</div>
@@ -370,14 +420,18 @@ const IntegrationSettings: React.FC = () => (
             {integration.name}
           </div>
           <button style={{
-            padding: '6px 16px',
-            background: integration.connected ? theme.colors.success + '20' : theme.colors.text.primary,
-            color: integration.connected ? theme.colors.success : theme.colors.backgroundWhite,
-            border: integration.connected ? `1px solid ${theme.colors.success}30` : 'none',
+            padding: '8px 16px',
+            background: integration.connected ? theme.colors.success : theme.colors.text.red,
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
+            color: '#ffffff',
+            border: integration.connected ? `1px solid ${theme.colors.success}` : `1px solid ${theme.colors.text.red}`,
             borderRadius: theme.borderRadius.sm,
             fontSize: '12px',
-            fontWeight: 500,
+            fontWeight: 600,
             cursor: 'pointer',
+            transition: 'all 0.3s ease',
+            textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)',
           }}>
             {integration.connected ? 'Connected' : 'Connect'}
           </button>
@@ -421,11 +475,15 @@ const BillingSettings: React.FC = () => (
     </h2>
 
     <div style={{
-      padding: theme.spacing.md,
-      background: `linear-gradient(135deg, ${theme.colors.text.primary}, ${theme.colors.text.red})`,
+      padding: '24px',
+      background: `linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(239, 68, 68, 0.4))`,
+      backdropFilter: 'blur(20px)',
+      WebkitBackdropFilter: 'blur(20px)',
       borderRadius: theme.borderRadius.lg,
-      color: theme.colors.backgroundWhite,
-      marginBottom: theme.spacing.lg,
+      border: `1px solid ${theme.colors.glass.redBorder}`,
+      color: theme.colors.text.primary,
+      marginBottom: '32px',
+      boxShadow: '0 8px 32px rgba(239, 68, 68, 0.2)',
     }}>
       <div style={{ fontSize: '14px', opacity: 0.9, marginBottom: '4px' }}>Current Plan</div>
       <div style={{ fontSize: '24px', fontWeight: 600, marginBottom: '12px' }}>Professional</div>
@@ -433,14 +491,18 @@ const BillingSettings: React.FC = () => (
     </div>
 
     <button style={{
-      padding: '10px 20px',
-      background: theme.colors.backgroundWhite,
-      color: theme.colors.text.primary,
-      border: `1px solid ${theme.colors.text.primary}`,
-      borderRadius: '6px',
+      padding: '12px 24px',
+      background: 'rgba(255, 255, 255, 0.15)',
+      backdropFilter: 'blur(16px)',
+      WebkitBackdropFilter: 'blur(16px)',
+      color: '#ffffff',
+      border: `1px solid rgba(255, 255, 255, 0.3)`,
+      borderRadius: theme.borderRadius.md,
       fontSize: '14px',
-      fontWeight: 500,
+      fontWeight: 600,
       cursor: 'pointer',
+      transition: 'all 0.3s ease',
+      textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)',
     }}>
       Upgrade to Enterprise
     </button>

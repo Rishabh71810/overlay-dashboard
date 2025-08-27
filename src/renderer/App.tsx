@@ -3,6 +3,13 @@ import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Dashboard from './components/Dashboard/Dashboard';
 import DecisionHub from './components/Overlay/DecisionHub';
 import DecisionHubPickle from './components/Overlay/DecisionHubPickle';
+import MinimalOverlay from './components/Overlay/MinimalOverlay';
+import FocusOverlay from './components/Overlay/FocusOverlay';
+import DashboardOverlay from './components/Overlay/DashboardOverlay';
+import AnalyticsOverlay from './components/Overlay/AnalyticsOverlay';
+import CollaborationOverlay from './components/Overlay/CollaborationOverlay';
+import MeetingOverlay from './components/Overlay/MeetingOverlay';
+import QuickOverlay from './components/Overlay/QuickOverlay';
 
 const App: React.FC = () => {
   return (
@@ -46,6 +53,55 @@ const App: React.FC = () => {
           </div>
         } />
         <Route path="/overlay-old" element={<DecisionHub />} />
+        <Route path="/overlay-minimal" element={
+          <div className="dark-overlay-background">
+            <div className="dark-overlay-container">
+              <MinimalOverlay />
+            </div>
+          </div>
+        } />
+        <Route path="/overlay-focus" element={
+          <div className="dark-overlay-background">
+            <div className="dark-overlay-container">
+              <FocusOverlay />
+            </div>
+          </div>
+        } />
+        <Route path="/overlay-dashboard" element={
+          <div className="dark-overlay-background">
+            <div className="dark-overlay-container">
+              <DashboardOverlay />
+            </div>
+          </div>
+        } />
+        <Route path="/overlay-analytics" element={
+          <div className="dark-overlay-background">
+            <div className="dark-overlay-container">
+              <AnalyticsOverlay />
+            </div>
+          </div>
+        } />
+        <Route path="/overlay-collaboration" element={
+          <div className="dark-overlay-background">
+            <div className="dark-overlay-container">
+              <CollaborationOverlay />
+            </div>
+          </div>
+        } />
+        <Route path="/overlay-meeting" element={
+          <div className="dark-overlay-background">
+            <div className="dark-overlay-container">
+              <MeetingOverlay />
+            </div>
+          </div>
+        } />
+        <Route path="/overlay-quick" element={
+          <div className="dark-overlay-background">
+            <div className="dark-overlay-container">
+              <QuickOverlay />
+            </div>
+          </div>
+        } />
         <Route path="/*" element={<Dashboard />} />
       </Routes>
     </Router>

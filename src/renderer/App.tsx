@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Dashboard from './components/Dashboard/Dashboard';
-import DecisionHub from './components/Overlay/DecisionHub';
+import DecisionHub from './components/DecisionHub/DecisionHub';
+import DecisionHubOld from './components/Overlay/DecisionHub';
 import DecisionHubPickle from './components/Overlay/DecisionHubPickle';
 import MinimalOverlay from './components/Overlay/MinimalOverlay';
 import FocusOverlay from './components/Overlay/FocusOverlay';
@@ -12,10 +13,23 @@ import MeetingOverlay from './components/Overlay/MeetingOverlay';
 import QuickOverlay from './components/Overlay/QuickOverlay';
 
 const App: React.FC = () => {
+  const [hubPosition, setHubPosition] = useState<'floating' | 'docked-right' | 'docked-left' | 'minimized'>('floating');
+
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Dashboard />} />
+        <Route path="/decision-hub" element={
+          <div style={{
+            width: '100vw',
+            height: '100vh',
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            position: 'relative',
+            overflow: 'hidden'
+          }}>
+            <DecisionHub position={hubPosition} onPositionChange={setHubPosition} />
+          </div>
+        } />
         <Route path="/overlay" element={
           <div style={{
             width: '100vw',
@@ -52,7 +66,7 @@ const App: React.FC = () => {
             <DecisionHubPickle />
           </div>
         } />
-        <Route path="/overlay-old" element={<DecisionHub />} />
+        <Route path="/overlay-old" element={<DecisionHubOld />} />
         <Route path="/overlay-minimal" element={
           <div className="dark-overlay-background">
             <div className="dark-overlay-container">
